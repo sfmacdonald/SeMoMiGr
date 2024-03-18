@@ -45,6 +45,36 @@ main {
     font-size: 45px; 
 }
 
+/* Footer styles */
+.footer {
+    text-align: center;
+    padding-top: 50px; /* Add large top padding */
+}
+
+.footer nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer nav ul li {
+    display: inline;
+    margin-right: 75px;
+}
+
+.footer nav ul li:last-child {
+    margin-right: 0;
+}
+
+.footer nav ul li a {
+    font-size: x-large; /* Set text size to XL */
+    color: #ffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+}
+
+.footer nav ul li a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
 /* CSS for small screens (up to 768px) */
 @media (max-width: 768px) {
     body {
