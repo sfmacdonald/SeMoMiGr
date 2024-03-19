@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Wedding - RSVP</title>
-    <link rel="icon" type="image/png" href="assets/pictures/White-Rose-icon.png">    
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/pictures/White-Rose-icon.png">    
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         <h1>Wedding RSVP</h1>
     </header>
 
-    <form action="submit_rsvp.php" method="post">
+    <form onsubmit="submitRSVP(); return false;">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         <label for="email">Email:</label>
@@ -41,7 +41,8 @@
         </nav>
     </footer>
 
-    <script src="./assets/js/script.js"></script>
+    <script src="/controllers/rsvp.js"></script>
+    <script src="/assets/js/script.js"></script>
 
 </body>
 
@@ -61,10 +62,9 @@
 </div>
 
 <div id="myModal" class="modal">
-    <!-- Modal content -->
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <p>RSVP already submitted! Please contact the bride/groom to update your RSVP. Thank you!</p>
+        <p>RSVP was previously submitted! Please contact the bride/groom to update your RSVP. Thank you!</p>
     </div>
 </div>
 
