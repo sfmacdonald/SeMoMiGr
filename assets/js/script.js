@@ -2,6 +2,7 @@
 function submitRSVP() {
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
+    var response = document.getElementById('response').value;
 
     // Perform AJAX request to check if RSVP already exists
     var xhr = new XMLHttpRequest();
@@ -15,7 +16,7 @@ function submitRSVP() {
                 showModal();
             } else {
                 // If RSVP doesn't exist, proceed with insertion
-                insertRSVP(name, email);
+                insertRSVP(name, email, response);
             }
         }
     };
@@ -43,7 +44,7 @@ window.onclick = function(event) {
 }
 
 // Function to insert new RSVP into the database
-function insertRSVP(name, email) {
+function insertRSVP(name, email, response) {
     // Perform AJAX request to insert RSVP into the database
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'insert_rsvp.php', true);
@@ -52,7 +53,12 @@ function insertRSVP(name, email) {
         // Handle response after inserting RSVP
         if (xhr.status == 200) {
             // Optionally, display a success message or redirect to a thank you page
+            if (response === "Yes") {
+                showSuccessModalYes();
+            } else if (response === "No") {
+                showSuccessModalNo();
+            }
         }
     };
-    xhr.send(JSON.stringify({ name: name, email: email }));
+    xhr.send(JSON.stringify({ name: name, email: email, response: response }));
 }
