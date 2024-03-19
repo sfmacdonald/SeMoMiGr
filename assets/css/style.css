@@ -111,8 +111,8 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: rgb(131, 22, 22); /* Darken background color on hover */
-    color: rgb(221, 221, 135);
+    background-color: rgb(235, 237, 185); /* Darken background color on hover */
+    color: rgb(60, 15, 15);
     font-weight: bold;
 }
 
