@@ -111,6 +111,22 @@ form input[type="submit"]:hover {
     background-color: #333; /* Darken background color on hover */
 }
 
+.about {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 25px; 
+    max-width: 800px; /* Set a maximum width for the section */
+    width: 100%; /* Set the width to 90% of the container's width */
+    margin: 0 auto; /* Center the section horizontally */
+}
+
+.about p {
+    margin: 20px;
+    text-align: justify; /* Justify the text */
+    line-height: 1.6; /* Set the line height to improve readability */
+}
+
 /* CSS for small screens (up to 768px) */
 @media (max-width: 768px) {
     body {
