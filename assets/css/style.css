@@ -100,25 +100,28 @@ form input[type="submit"] {
     width: 75%; /* Make submit button full-width */
     padding: 15px; /* Increase padding for larger button */
     font-size: 18px; /* Increase font size for larger button */
-    background-color: #000; /* Set background color */
+    background-color: rgb(60, 15, 15); /* Set background color */
     color: #fff; /* Set text color */
     border: none; /* Remove border */
     border-radius: 5px; /* Add border radius */
     cursor: pointer; /* Add pointer cursor */
+    margin-top: 20px;
 }
 
 form input[type="submit"]:hover {
-    background-color: #333; /* Darken background color on hover */
+    background-color: rgb(131, 22, 22); /* Darken background color on hover */
+    color: rgb(221, 221, 135);
+    font-weight: bold;
 }
 
 .about {
     padding: 20px;
     margin-top: 20px;
     border-radius: 10px;
-    font-size: 35px; 
+    font-size: 20px; 
     max-width: 1000px; /* Set a maximum width for the section */
     width: 100%; /* Set the width to 90% of the container's width */
-    margin: 0 auto; /* Center the section horizontally */
+    margin: 0; /* Center the section horizontally */
 }
 
 .about p {
