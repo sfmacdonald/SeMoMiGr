@@ -90,16 +90,18 @@ form input[type="text"],
 form input[type="email"],
 form select,
 form input[type="number"] {
-    width: 100%; /* Make input fields full-width */
-    padding: 10px; /* Increase padding for larger input fields */
-    margin-bottom: 1px; /* Add space between input fields */
+    width: calc(100% - 22px); /* Make input fields full-width */
+    padding: 15px; /* Increase padding for larger input fields */
+    margin-bottom: 10px; /* Add space between input fields */
     font-size: 20px; /* Increase font size for larger input fields */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
 }
 
 form input[type="submit"] {
     width: 75%; /* Make submit button full-width */
     padding: 15px; /* Increase padding for larger button */
-    font-size: 18px; /* Increase font size for larger button */
+    font-size: 20px; /* Increase font size for larger button */
     background-color: rgb(60, 15, 15); /* Set background color */
     color: #fff; /* Set text color */
     border: none; /* Remove border */
@@ -119,9 +121,10 @@ form input[type="submit"]:hover {
     margin-top: 20px;
     border-radius: 10px;
     font-size: 20px; 
-    max-width: 1000px; /* Set a maximum width for the section */
+    max-width: 1900px; /* Set a maximum width for the section */
     width: 100%; /* Set the width to 90% of the container's width */
     margin: 0; /* Center the section horizontally */
+    background-color: rgba(5, 5, 5, 0.329); /* Transparent white background */
 }
 
 .about p {
