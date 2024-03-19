@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
 
         // Send email notification to admin
-        $to = "seanfmacdonald@icloud.com","alisonlapham@live.com";
+        $to = array("seanfmacdonald@icloud.com", "alisonlapham@live.com");
         $subject = "New Wedding RSVP Submitted!";
         $message = "A new RSVP for your wedding has been submitted:\n\nName: $name\nEmail: $email\nResponse: $response\nParty Size: $party_size";
-        $headers = "seanfmacdonald@icloud.com", "alisonlapham@live.com";
+        $headers = "From: admin@example.com";
 
         // Send email
-        mail($to, $subject, $message, $headers);
+        mail(implode(",", $to), $subject, $message, $headers);
 
         // Display success message
         echo "RSVP submitted successfully. Thank you!";
