@@ -1,33 +1,37 @@
-<?php
-// Database connection
-$host = "localhost"; // Change this to your database host
-$username = "username"; // Change this to your database username
-$password = "password"; // Change this to your database password
-$dbname = "WeddingDB"; // Change this to your database name
+// Include required modules
+const mysql = require('mysql');
 
-$conn = new mysqli($host, $username, $password, $dbname);
+// Create MySQL connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'username',
+  password: 'password',
+  database: 'myDB'
+});
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Connect to MySQL
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL database: ' + err.stack);
+    return;
+  }
+  console.log('Connected to MySQL database as id ' + connection.threadId);
+});
 
-// Get form data
-$name = $_POST['name'];
-$email = $_POST['email'];
-$response = $_POST['response'];
-$party_size = isset($_POST['party_size']) ? $_POST['party_size'] : NULL;
+// Perform SQL query
+connection.query('SELECT id, firstname, lastname FROM MyGuests', (error, results, fields) => {
+  if (error) throw error;
+  // Output data of each row
+  results.forEach((row) => {
+    console.log(`id: ${row.id} - Name: ${row.firstname} ${row.lastname}`);
+  });
+});
 
-// Insert RSVP into database
-$sql = "INSERT INTO attendees (name, email, party_size, other_details) VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssis", $name, $email, $party_size, $response);
-$stmt->execute();
-$stmt->close();
-
-$conn->close();
-
-// Redirect back to RSVP form
-header("Location: index.php");
-exit();
-?>
+// Close MySQL connection
+connection.end((err) => {
+  if (err) {
+    console.error('Error closing MySQL connection: ' + err.stack);
+    return;
+  }
+  console.log('MySQL connection closed.');
+});

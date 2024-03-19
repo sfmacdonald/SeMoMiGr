@@ -1,0 +1,26 @@
+{
+  "name": "semomigr",
+  "version": "1.0.0",
+  "description": "Wedding Website",
+  "main": "rsvp.js",
+  "scripts": {
+    "test": "test",
+    "start": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sfmacdonald/SeMoMiGr.git"
+  },
+  "keywords": [
+    "wedding",
+    "rsvp",
+    "JavaScript",
+    "SQL"
+  ],
+  "author": "Sean MacDonald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sfmacdonald/SeMoMiGr/issues"
+  },
+  "homepage": "https://github.com/sfmacdonald/SeMoMiGr"
+}
