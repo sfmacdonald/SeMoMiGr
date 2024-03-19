@@ -1,9 +1,7 @@
 -- Insert attendees
-INSERT INTO attendees (name, email, other_details) VALUES
-('Kelley MacDonald', 'john@example.com', 'Guest of honor'),
-('Jane Smith', 'jane@example.com', 'Plus one');
+INSERT INTO attendees (name, email, party_size, other_details) VALUES
+('Sean MacDonald', 'seanfmacdonald@icloud.com', '4', 'Groom');
 
 -- Insert RSVPs
 INSERT INTO rsvps (attendee_id, response) VALUES
-(1, 'Yes'),
-(2, 'No');
+(1, 'Yes');
