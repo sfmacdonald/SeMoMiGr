@@ -17,11 +17,12 @@ The purpose of the website is to provide a platform for our wedding party and th
 
 This website includes the following features and functions:
 
-1. Landing page with basic information
-2. About page that provides more detailed information about the couple, their story, and their vision for their future life together
+1. Landing page with basic wedding information
+2. "About" page that provides more detailed information about the couple, their story, and their vision for their future life together
 3. RSVP form for guests to indicate their attendance (yes/no). If yes, they may include the number of people in their party
 
 ## Usage
 
 The github repository may be found at https://github.com/sfmacdonald/SeMoMiGr
+
 The live URL for the working website is https://sfmacdonald.github.io/SeMoMiGr/index.html
