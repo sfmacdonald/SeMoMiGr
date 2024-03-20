@@ -1,7 +1,7 @@
 // Import required modules
 const http = require('http');
 const querystring = require('querystring');
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 
 // Create an HTTP server
 const server = http.createServer((req, res) => {
@@ -36,33 +36,37 @@ const server = http.createServer((req, res) => {
             // ...
 
             // Send email notification
-            const transporter = nodemailer.createTransport({
-                service: 'your_email_service_provider',
-                auth: {
-                    user: 'your_email@example.com',
-                    pass: 'your_email_password'
-                }
-            });
+            // const transporter = nodemailer.createTransport({
+                // service: 'your_email_service_provider',
+                // auth: {
+                    // user: 'your_email@example.com',
+                    // pass: 'your_email_password'
+                // }
+            // });
 
-            const mailOptions = {
-                from: 'your_email@example.com',
-                to: ['seanfmacdonald@icloud.com', 'alisonlapham@live.com'],
-                subject: 'New Wedding RSVP Submitted!',
-                text: `A new RSVP for your wedding has been submitted:\n\nName: ${name}\nEmail: ${email}\nResponse: ${response}\nParty Size: ${partySize}`
-            };
+            // const mailOptions = {
+                // from: 'your_email@example.com',
+                // to: ['seanfmacdonald@icloud.com', 'alisonlapham@live.com'],
+                // subject: 'New Wedding RSVP Submitted!',
+                // text: `A new RSVP for your wedding has been submitted:\n\nName: ${name}\nEmail: ${email}\nResponse: ${response}\nParty Size: ${partySize}`
+            // };
 
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.error('Error sending email:', error);
-                    res.writeHead(500, {'Content-Type': 'text/plain'});
-                    res.end('Internal Server Error');
-                } else {
-                    console.log('Email sent:', info.response);
-                    res.writeHead(200, {'Content-Type': 'text/plain'});
-                    res.end('RSVP submitted successfully. Thank you!');
-                }
-            });
-        });
+            // transporter.sendMail(mailOptions, (error, info) => {
+                // if (error) {
+                    // console.error('Error sending email:', error);
+                    // res.writeHead(500, {'Content-Type': 'text/plain'});
+                    // res.end('Internal Server Error');
+                // } else {
+                    // console.log('Email sent:', info.response);
+                    // res.writeHead(200, {'Content-Type': 'text/plain'});
+                    // res.end('RSVP submitted successfully. Thank you!');
+                // }
+            // });
+            
+       // Respond with success message
+       res.writeHead(200, {'Content-Type': 'text/plain'});
+       res.end('RSVP submitted successfully. Thank you!');
+   });
     } else {
         // Respond with Method Not Allowed for other request methods
         res.writeHead(405, {'Content-Type': 'text/plain'});
@@ -74,4 +78,4 @@ const server = http.createServer((req, res) => {
 const PORT = process.env.PORT || 3307;
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-});
+})

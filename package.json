@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/sfmacdonald/SeMoMiGr/issues"
   },
-  "homepage": "https://github.com/sfmacdonald/SeMoMiGr"
+  "homepage": "https://github.com/sfmacdonald/SeMoMiGr",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
 }

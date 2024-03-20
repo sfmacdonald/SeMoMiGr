@@ -1,37 +1,65 @@
-// Include required modules
+const express = require('express');
 const mysql = require('mysql');
 
-// Create MySQL connection
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+const app = express();
+
+// Create MySQL connection pool
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    connectionLimit: 10 // Adjust as needed
 });
 
-// Connect to MySQL
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL database: ' + err.stack);
-    return;
-  }
-  console.log('Connected to MySQL database as id ' + connection.threadId);
+// Middleware to acquire a MySQL connection from the pool
+app.use((req, res, next) => {
+    pool.getConnection((err, connection) => {
+        if (err) {
+            return next(err);
+        }
+        req.mysqlConnection = connection;
+        next();
+    });
 });
 
-// Perform SQL query
-connection.query('SELECT id, firstname, lastname FROM MyGuests', (error, results, fields) => {
-  if (error) throw error;
-  // Output data of each row
-  results.forEach((row) => {
-    console.log(`id: ${row.id} - Name: ${row.firstname} ${row.lastname}`);
-  });
+// Middleware to release the MySQL connection back to the pool
+app.use((req, res, next) => {
+    if (!req.mysqlConnection) {
+        return next(new Error('MySQL connection not available'));
+    }
+    req.mysqlConnection.release();
+    next();
 });
 
-// Close MySQL connection
-connection.end((err) => {
-  if (err) {
-    console.error('Error closing MySQL connection: ' + err.stack);
-    return;
-  }
-  console.log('MySQL connection closed.');
+// Handle RSVP submission
+app.post('/submit_rsvp', (req, res, next) => {
+    const { name, email, response, party_size } = req.body;
+
+    if (!name || !email || !response) {
+        return res.status(400).send('Please fill in all required fields.');
+    }
+
+    req.mysqlConnection.query(
+        'INSERT INTO rsvps (name, email, response, party_size) VALUES (?, ?, ?, ?)',
+        [name, email, response, party_size],
+        (error, results) => {
+            if (error) {
+                return next(error);
+            }
+            res.status(200).send('RSVP submitted successfully. Thank you!');
+        }
+    );
+});
+
+// Error handler middleware
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+});
+
+// Start the server
+const PORT = process.env.PORT || 3307;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
