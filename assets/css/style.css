@@ -180,21 +180,23 @@ form input[type="submit"]:hover {
 }
 
 /* CSS for small screens (up to 768px) */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
     body {
-        font-size: 16px; 
-        padding: 0; 
+        font-size: 14px; 
     }
     .header {
-        padding: 80px;
+        padding: 80px 0;
     }
     .details {
         max-width: 100%; 
     }
     .details h2 {
-        font-size: 36px; 
+        font-size: 5vw; 
     }
     .details p {
-        font-size: 24px;
+        font-size: 3vw; 
+    }
+    .footer nav ul li {
+        margin-right: 10px; 
     }
 }
