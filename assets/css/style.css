@@ -180,8 +180,9 @@ form input[type="submit"]:hover {
 }
 
 /* CSS for small screens (up to 768px) */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     body {
+        background-image: url('../pictures/Mobile-Background.png'); 
         font-size: 14px; 
     }
     .header {
