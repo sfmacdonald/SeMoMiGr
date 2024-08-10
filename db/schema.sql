@@ -6,7 +6,7 @@ CREATE DATABASE WeddingDB;
 
 -- Use the newly created database
 USE WeddingDB;
-
+SHOW TABLES;
 -- Create the attendees table
 CREATE TABLE attendees (
     id INT PRIMARY KEY AUTO_INCREMENT,
