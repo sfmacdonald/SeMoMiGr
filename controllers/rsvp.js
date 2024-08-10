@@ -12,6 +12,10 @@ const pool = mysql.createPool({
     connectionLimit: 10 // Adjust as needed
 });
 
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Middleware to acquire a MySQL connection from the pool
 app.use((req, res, next) => {
     pool.getConnection((err, connection) => {
@@ -23,12 +27,13 @@ app.use((req, res, next) => {
     });
 });
 
-// Middleware to release the MySQL connection back to the pool
+// Middleware to release the MySQL connection back to the pool after response is sent
 app.use((req, res, next) => {
-    if (!req.mysqlConnection) {
-        return next(new Error('MySQL connection not available'));
-    }
-    req.mysqlConnection.release();
+    res.on('finish', () => {
+        if (req.mysqlConnection) {
+            req.mysqlConnection.release();
+        }
+    });
     next();
 });
 
@@ -41,13 +46,49 @@ app.post('/submit_rsvp', (req, res, next) => {
     }
 
     req.mysqlConnection.query(
-        'INSERT INTO rsvps (name, email, response, party_size) VALUES (?, ?, ?, ?)',
-        [name, email, response, party_size],
+        'SELECT id FROM attendees WHERE email = ?',
+        [email],
         (error, results) => {
             if (error) {
                 return next(error);
             }
-            res.status(200).send('RSVP submitted successfully. Thank you!');
+
+            if (results.length > 0) {
+                const attendeeId = results[0].id;
+
+                req.mysqlConnection.query(
+                    'UPDATE rsvps SET response = ?, party_size = ? WHERE attendee_id = ?',
+                    [response, party_size, attendeeId],
+                    (err, updateResults) => {
+                        if (err) {
+                            return next(err);
+                        }
+                        res.status(200).send('RSVP updated successfully. Thank you!');
+                    }
+                );
+            } else {
+                req.mysqlConnection.query(
+                    'INSERT INTO attendees (name, email, party_size) VALUES (?, ?, ?)',
+                    [name, email, party_size],
+                    (err, insertResults) => {
+                        if (err) {
+                            return next(err);
+                        }
+                        const attendeeId = insertResults.insertId;
+
+                        req.mysqlConnection.query(
+                            'INSERT INTO rsvps (attendee_id, response) VALUES (?, ?)',
+                            [attendeeId, response],
+                            (err, insertRsvpResults) => {
+                                if (err) {
+                                    return next(err);
+                                }
+                                res.status(200).send('RSVP submitted successfully. Thank you!');
+                            }
+                        );
+                    }
+                );
+            }
         }
     );
 });
