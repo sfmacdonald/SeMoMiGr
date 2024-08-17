@@ -66,6 +66,19 @@ main {
     line-height: 1.6; /* Set the line height to improve readability */
 }
 
+.registry {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    max-width: 2500px;
+}
+
+.registry p {
+    margin: 20px;
+    font-size: 75px;
+    line-height: 1.6;
+}
+
 /* Footer styles */
 .footer {
     position: fixed; /* Set position to fixed */
