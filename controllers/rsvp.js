@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 app.post('/submit_rsvp', (req, res, next) => {
     const { name, email, response, party_size } = req.body;
 
-    if (!name || !email || !response) {
+    if (!name || !email || !response || !party_size) {
         return res.status(400).send('Please fill in all required fields.');
     }
 
